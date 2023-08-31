@@ -7,6 +7,7 @@ const alumnosRoute = require("./routes/alumno");
 const materiaRoute = require("./routes/materia");
 const cicloRoute = require("./routes/ciclo");
 const LoginRoute = require("./routes/login");
+const Login2Route = require("./routes/login2");
 const app = express();
 
 app.use(cors({
@@ -31,6 +32,7 @@ app.use("/api/sign-up", require("./routes/signUp"));
  */
 //solo tienen get y get/id--------------
 app.use(LoginRoute); //http://localhost:3000/api/login
+app.use(Login2Route); //http://localhost:3000/api/login2
 app.use(docenteRoute); //http://localhost:3000/api/docentes/
 app.use(materiaRoute); //http://localhost:3000/api/materias/                    --datos materia incluido docente encargado
 

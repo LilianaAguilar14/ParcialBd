@@ -110,6 +110,17 @@ c.execute("""INSERT INTO alumno VALUES (4, Diego, Castro, 72746858, 2023DC140, D
                 db.run(insert,["Buen trabajo",9.00,8.54,9.65,9.06,1])
                 db.run(insert, ["Puedes mejorar",6.00,7.20,7.50,6.9,1])
                 db.run(insert,  ["Sigue asi",10,9.5,10,9.83,1])
+                db.run(insert, ["Sigue asi", 10, 9, 8, 9, 1]);
+                db.run(insert, ["Buen trabajo", 8, 8.5, 9, 7.83, 1]);
+                db.run(insert, ["Sigue asi", 6, 7.5, 5, 7, 1]);
+
+                db.run(insert, ["Buen trabajo", 8, 7, 7.5, 9, 1]);
+                db.run(insert, ["Puedes mejorar", 4, 2, 4, 8, 1]);
+                db.run(insert, ["Sigue asi", 7, 9, 6, 8, 1]);
+
+                db.run(insert, ["Sigue asi", 10, 9.5, 10, 9.83, 1]);
+                db.run(insert, ["Buen Trabajo", 8, 4, 8, 9.83, 1]);
+                db.run(insert, ["Puedes mejorar", 5, 4, 7, 6, 1]);
                 console.log('periodo de prueba')
             }
         }); 
@@ -135,6 +146,9 @@ c.execute("""INSERT INTO alumno VALUES (4, Diego, Castro, 72746858, 2023DC140, D
                
                 var insert = 'INSERT INTO ciclos (promedio_ciclo,id_periodo1,id_periodo2,id_periodo3,id_materia) VALUES (?,?,?,?,?)'
                 db.run(insert, [9.00,1,2,3,1])
+                db.run(insert, [8.0, 4, 5, 6, 2]);
+                db.run(insert, [7.0, 7, 8, 9, 3]);
+                db.run(insert, [8.5, 10, 11, 12, 4]);
                 console.log('ciclo de prueba')
             }
         });

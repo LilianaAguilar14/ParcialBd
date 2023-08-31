@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Login.jsx";
+import Login2 from "./components/Login2.jsx";
 import Alumno from "./pages/Alumno.jsx";
 import LayoutAlumno from "./components/LayoutAlumno.jsx";
 import Notas from "./pages/Notas";
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Login />,
   },
+  
   {
     path: "/alumno",
     element: <LayoutAlumno />,
@@ -42,11 +44,16 @@ const router = createBrowserRouter([
   },
 
   {
+    path: "/2",
+    element: <Login2 />,
+  },
+
+  {
     path: "/docente",
     element: <LayoutDocente />,
     children: [
       {
-        path: "/docente/inicio",
+        path: "/docente/:carnet",
         element: <Docente />,
       },
       {
