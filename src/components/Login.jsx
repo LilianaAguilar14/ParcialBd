@@ -1,28 +1,35 @@
-import React from "react";
 import { useState } from "react";
-import { useNavigate,Navigate,Outlet } from "react-router-dom";
+import { useNavigate, Navigate, Outlet } from "react-router-dom";
+import LayoutAlumno from "./LayoutAlumno";
 
 const Login = () => {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState(false);
   const [bandera, setBandera] = useState(false);
- 
+  const [info, setInfo] = useState({});
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const objInfo = {
+      user,
+      pass,
+    };
+    setInfo(objInfo);
     console.log(user, pass);
 
     try {
       const response = await fetch("http://localhost:3000/api/login", {
         method: "POST",
         headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': 'POST, GET, PUT, DELETE, OPTIONS, HEAD, Authorization, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Origin',
-          'Content-Type': 'application/json',
-        mode: 'no-cors'
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers":
+            "POST, GET, PUT, DELETE, OPTIONS, HEAD, Authorization, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Origin",
+          "Content-Type": "application/json",
+          mode: "no-cors",
         },
-        
+
         body: JSON.stringify({ carnet: user, password: pass }),
       });
 
@@ -30,8 +37,12 @@ const Login = () => {
         const data = await response.json();
         // Almacenar el token en localStorage
         localStorage.setItem("token", data.token);
-        setBandera(true);
-        
+        if (data.Login) {
+          setBandera(true);
+        } else {
+          setError(true);
+        }
+        console.log(data);
       } else {
         setError(true);
       }
@@ -50,13 +61,11 @@ const Login = () => {
         <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
           {error && (
             <div className="bg-red-700 text-white font-bold uppercase p-5 text-sm rounded-lg text-center mb-5">
-              Debe llenar todos los campos
+              Login invalido
             </div>
           )}
-          {bandera && (
-            <Navigate to="/alumno/inicio" replace={true} />
-          )}
-         
+          {bandera && <Navigate to={`/alumno/${user}`} replace={true} />}
+
           <form className="space-y-6" onSubmit={handleSubmit}>
             <h5 className="text-xl font-medium text-gray-900 dark:text-white">
               Login
@@ -100,7 +109,6 @@ const Login = () => {
       </div>
       <Outlet />
     </div>
-    
   );
 };
 

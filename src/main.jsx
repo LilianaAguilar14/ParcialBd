@@ -18,59 +18,51 @@ import AuthProvider from "./auth/AuthProvider";
 import SignUp from "./components/SignUp";
 
 const router = createBrowserRouter([
- 
-  
   {
     path: "/",
     element: <Login />,
   },
-    {
-      path: "/alumno",
-      element: <LayoutAlumno />,
-      children: [
-        {
-          path: "/alumno/inicio",
-          element: <Alumno />,
-        },
-        {
-          path: "/alumno/notas",
-          element: <Notas />,
-        },
-        {
-          path: "/alumno/perfil",
-          element: <Perfil />,
-        },
-      ],
-   
-    },
-       
-       
-
-     
+  {
+    path: "/alumno",
+    element: <LayoutAlumno />,
+    children: [
       {
-        path: "/docente",
-        element: <LayoutDocente />,
-        children: [
-          {
-            path: "/docente/inicio",
-            element: <Docente />,
-          },
-          {
-            path: "/docente/alumnos",
-            element: <AlumnosDocente />,
-          },
-          {
-            path: "/docente/perfil",
-            element: <PerfilDocente />,
-          },
-          {
-            path: "/docente/notas-alumno",
-            element: <NotasAlumDocente />,
-          },
-        ],
+        path: "/alumno/:carnet",
+        element: <Alumno />,
       },
-    
-  
+      {
+        path: "/alumno/notas",
+        element: <Notas />,
+      },
+      {
+        path: "/alumno/perfil",
+        element: <Perfil />,
+      },
+    ],
+  },
+
+  {
+    path: "/docente",
+    element: <LayoutDocente />,
+    children: [
+      {
+        path: "/docente/inicio",
+        element: <Docente />,
+      },
+      {
+        path: "/docente/alumnos",
+        element: <AlumnosDocente />,
+      },
+      {
+        path: "/docente/perfil",
+        element: <PerfilDocente />,
+      },
+      {
+        path: "/docente/notas-alumno",
+        element: <NotasAlumDocente />,
+      },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
