@@ -1,8 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useReactToPrint } from "react-to-print";
+
 
 const Notas = () => {
+  const conponentPDF = useRef();
+  const generatePDF = useReactToPrint({
+    content: () => conponentPDF.current,
+    documentTitle: "userdata",
+    onafterprint: () =>alert("Printed Successfully")
+  });
   const [periodo1f, setPeriodo1f] = useState(
     localStorage.getItem("periodo1f") ?? []
   );
@@ -292,18 +300,25 @@ const Notas = () => {
   console.log(prom1p);
   const navigate = useNavigate();
   return (
+
+    <div
+    className="bg-no-repeat bg-cover w-full h-screen"
+    style={{
+      backgroundImage: `url('/public/img/mu.jpg')`,
+    }}
+  >
     <div>
-      <div className="flex justify-center">
-        <div>
-          <table>
+      <div className="flex justify-center py-28">
+      <div ref={conponentPDF} className="bg-white p-0 rounded-md">
+          <table className="w-full text-sm text-left text-black bg-white">
             <thead>
               <tr>
-                <td className="bg-black text-white p-3 text-center">Materia</td>
-                <td className="bg-black text-white p-3">Periodo 1</td>
-                <td className="bg-black text-white p-3">Periodo 2</td>
-                <td className="bg-black text-white p-3">Periodo 3</td>
-                <td className="bg-black text-white p-3">Promedio</td>
-                <td className="bg-black text-white p-3">Comentario</td>
+                <td className="bg-blue-500 text-white p-3 text-center">Materia</td>
+                <td className="bg-blue-500 text-white p-3">Periodo 1</td>
+                <td className="bg-blue-500 text-white p-3">Periodo 2</td>
+                <td className="bg-blue-500 text-white p-3">Periodo 3</td>
+                <td className="bg-blue-500 text-white p-3">Promedio</td>
+                <td className="bg-blue-500 text-white p-3">Comentario</td>
               </tr>
             </thead>
             <tbody>
@@ -389,8 +404,16 @@ const Notas = () => {
               </tr>
             </tbody>
           </table>
+          <div className="ml-2 py-5 ">
+            <button
+             className="bg-blue-700 rounded-lg p-3 text-white w-20"
+             type="submit" onClick={generatePDF}>
+             PDF
+            </button>
+            </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

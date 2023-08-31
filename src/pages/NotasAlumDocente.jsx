@@ -474,19 +474,21 @@ const NotasAlumDocente = () => {
   }, [com3]);
 
   return (
-    <div>
-      <div className="flex justify-center">
+    
+    
+    <div className="max-w-screen-lg mx-auto px-4 overflow-x-auto">
+      <div className="flex justify-center py-5">
         <h1 className="text-6xl font-bold">Notas Por Alumno</h1>
       </div>
       <div className="flex justify-center py-5">
         <h1 className="text-6xl font-bold">Ciclo 2</h1>
       </div>
 
-      <div className="relative  mt-40">
-        <table className="w-full text-sm text-left text-gray-500">
+      <div className="relative m-1.5 ">
+        <table className="w-full text-sm text-center text-black-500 ">
           <thead className="text-xs bg-black uppercase text-white border border-solid border-gray-300">
             <tr>
-              <th scope="col" className="px-6 py-3 text-center">
+              <th scope="col" className=" px-6 py-4 text-sm text-gray-900 whitespace-nowrap text-center w-[10%]">
                 Periodo
               </th>
               <th scope="col" className="px-6 py-3 text-center">

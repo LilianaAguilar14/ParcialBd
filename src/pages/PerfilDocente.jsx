@@ -28,6 +28,7 @@ const PerfilDocente = () => {
       }, [docentes]);
     
   return (
+    
     <div>
         <div className='flex justify-center'>
         <h1 className='text-6xl font-bold'>{docentes.nombre} {docentes.apellido}</h1>
