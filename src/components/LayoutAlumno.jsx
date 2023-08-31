@@ -32,7 +32,7 @@ const LayoutAlumno = ({ info }) => {
         <div className="bg-blue-500 md:w-1/4  px-5 py-10">
           <div className=" flex flex-col justify-center items-center pt-48">
             <img
-              src="/public/img/jefry.jpeg"
+              src="/public/img/fotoperfil-removebg-preview.png"
               alt=""
               className="rounded-full w-36 h-36"
             />

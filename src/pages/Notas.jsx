@@ -287,7 +287,8 @@ const Notas = () => {
   useEffect(() => {
     localStorage.setItem("promp1", JSON.stringify(prom1p));
   }, [prom1p]);
-
+  const promediof =
+    (periodo1f.promedio + periodo2f.promedio + periodo3f.promedio) / 3;
   console.log(prom1p);
   const navigate = useNavigate();
   return (
@@ -320,10 +321,10 @@ const Notas = () => {
                   <button>{periodo3f.promedio}</button>
                 </td>
                 <td className="text-center border border-solid p-3">
-                  {prom1f.promedio}
+                  {promediof.toFixed(2)}
                 </td>
                 <td className="text-center border border-solid p-3">
-                  {prom1f.comentario}
+                  {prom1D.comentario}
                 </td>
               </tr>
               <tr>
