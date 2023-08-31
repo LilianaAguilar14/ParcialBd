@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Outlet, NavLink, useLocation } from "react-router-dom";
 import axios from "axios";
 
-const LayoutAlumno = () => {
-  const [alumno, setAlumno] = useState();
-
+const LayoutAlumno = ({ info }) => {
+  const [alumno, setAlumno] = useState("");
   const getAlumnos = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/alumnos/2023KC120`
+        `http://localhost:3000/api/alumnos/${info.user}`
       );
       const data = response.data;
       setAlumno(data.data);
@@ -16,10 +15,14 @@ const LayoutAlumno = () => {
       console.log(error);
     }
   };
-
+  console.log(alumno);
   useEffect(() => {
     getAlumnos();
   }, []);
+
+  /*  useEffect(() => {
+    localStorage.setItem("alumnos", JSON.stringify(alumno));
+  }, [alumno]); */
 
   console.log(alumno);
 
@@ -33,8 +36,7 @@ const LayoutAlumno = () => {
               alt=""
               className="rounded-full w-36 h-36"
             />
-            {/*             <p>{alumno.nombre}</p>
-             */}{" "}
+            <p>{alumno.nombre}</p>
             <NavLink
               className={({ isActive }) =>
                 isActive

@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Navigate, Outlet } from "react-router-dom";
 import LayoutAlumno from "./LayoutAlumno";
+import Perfil from "../pages/Perfil";
 
 const Login = () => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(localStorage.getItem("user") ?? "");
   const [pass, setPass] = useState("");
   const [error, setError] = useState(false);
   const [bandera, setBandera] = useState(false);
-  const [info, setInfo] = useState({});
+  const [info, setInfo] = useState(localStorage.getItem("info") ?? {});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,6 +52,13 @@ const Login = () => {
       setError(true);
     }
   };
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
+  useEffect(() => {
+    localStorage.setItem("info", JSON.stringify(info));
+  }, [info]);
+
   const navigate = useNavigate();
   return (
     <div
@@ -106,6 +114,8 @@ const Login = () => {
             </button>
           </form>
         </div>
+        {[info].includes({}) && <LayoutAlumno info={info} />}
+        {[info].includes({}) && <Perfil info={info} />}
       </div>
       <Outlet />
     </div>

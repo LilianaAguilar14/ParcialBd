@@ -1,18 +1,47 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-
-
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const Perfil = () => {
-    const navigate=useNavigate()
+  const navigate = useNavigate();
+  const [alumno, setAlumno] = useState(localStorage.getItem("alumno") ?? {});
+
+  const getAlumnos = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/alumnos/2023KC120`
+      );
+      const data = response.data;
+      setAlumno(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getAlumnos();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("alumno", JSON.stringify(alumno));
+  }, [alumno]);
+
   return (
     <div>
-        <div className='flex justify-end'>
-            <button onClick={()=>navigate('/alumno/inicio')} className='bg-blue-700 hover:bg-blue-200 hover:text-black text-white font-bold py-2 px-4 m-2 rounded-xl w-46 uppercase text-center'>Volver al inicio</button>
-        </div>
-       
-        <h1 className='text-6xl'>Perfil</h1>
-    </div>
-  )
-}
+      <div className="flex justify-center items-center">
+        <div className="mt-52">
+          <h1 className="text-start font-bold text-6xl border-b-8 border-blue-700">
+            <span className="text-blue-700">Nombre: </span>
+            {alumno.nombre}
+          </h1>
 
-export default Perfil
+          <h1 className="text-start font-semibold text-3xl mt-11 border-b-4 border-blue-700">
+            <span className="text-blue-700">Carnet: </span>
+            {alumno.carnet}
+          </h1>
+          <h1></h1>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Perfil;
